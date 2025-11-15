@@ -1,0 +1,168 @@
+% !TeX root = ../install-latex-guide-en.tex
+
+% \chapter*{前言}
+\chapter*{Preface}
+
+% 以``啸行''名义加入 QQ 群 91940767、478023327、640633524 和 200392395 后,
+% 经常有群友咨询如何安装 \LaTeX.
+% 实际上,
+% 用户安装的是 \LaTeX\ 的\textbf{发行版}和相关的\textbf{编辑器}.
+% 本手册将介绍在\textbf{不存在其他 \LaTeX\ 发行版 (如 C\TeX\ 套装) 的前提下},
+% 在 Windows 11、Ubuntu 24.04 和 macOS 系统中安装
+% \TeX~Live (macOS 中介绍 Mac\TeX)、升级宏包、编译简易文档等相关操作,
+% 并多以介绍命令行操作为主.
+% 有关 MiK\TeX\ 的安装,
+% 可以参考 \href{https://camusecao.top/2021-06-16/MiKTeX/}{MiK\TeX\ 的基本使用}.
+This manual will introduce the installation of \TeX~Live
+(Mac\TeX\ is introduced in macOS), upgrading packages,
+compiling simple documents, and other related operations in Windows 11,
+Ubuntu 24.04, and macOS, assuming that
+\textbf{other \LaTeX\ distributions (such as C\TeX\ Suite) do not exist},
+and mainly introduces command line operations.
+For the installation of MiK\TeX, please refer to
+\href{https://camusecao.top/2021-06-16/MiKTeX/}{\emph{Basic use of \textup{MiK\TeX}}}.
+
+% 本手册还将简要介绍几款常见编辑器的使用方法,
+% 其他编辑器如 \href{https://code.visualstudio.com/}{VS Code},
+% \href{https://www.vim.org/}{Vim},
+% 用户可自行了解它们的使用方法.
+% 鉴于 WSL 较为特殊,
+% 本手册提供了一份 VS Code 配合
+% \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{\LaTeX\ Workshop}
+% 的自用配置单,
+% 仅供参考.
+This manual will also briefly introduce the usage of several common editors.
+For other editors such as \href{https://code.visualstudio.com/}{VS Code},
+\href{https://www.vim.org/}{Vim}, users can learn how to use them by themselves.
+Given that WSL is quite special,
+this manual provides a self-use configuration list for VS Code with
+\href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{\LaTeX\ Workshop}
+for reference only.
+
+% 本手册还额外介绍在线 \LaTeX\ 平台的相关内容,
+% 如国际知名的 \href{http://www.overleaf.com/}{Overleaf} 等.
+This manual also provides introductions about online \LaTeX\ platforms,
+Such as the internationally renowned
+\href{http://www.overleaf.com/}{Overleaf}, etc.
+
+% 本手册所涉及到的代码需结合上下文说明, 不能简单地复制粘贴.
+% 粉色文字都是可点的超链接, 可直接跳转.
+% \menu{菜单} 表示软件菜单. \keys{k} 表示键盘按键.
+% 建议用户阅读 \href{https://tug.org/texlive/doc/texlive-zh-cn/texlive-zh-cn.pdf}{\textsf{texlive-zh-cn}}
+% 和 \href{http://mirrors.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{\textsf{lshort-zh-cn}}
+% 以更全面地了解基础内容.
+The codes involved in this manual need to be explained in context
+and cannot be simply copied and pasted.
+The pink texts are clickable hyperlinks that can be directly jumped.
+\menu{menu} represents the software menu, \keys{k} represents the keyboard keys.
+It is recommended that users read
+\href{https://tug.org/texlive/doc/texlive-en/texlive-en.pdf}{\textsf{texlive-en}}
+and
+\href{http://mirrors.ctan.org/info/lshort/english/lshort.pdf}{\textsf{lshort}}
+to have a more comprehensive understanding of the basic content.
+
+% 必须声明的是,
+% 即便你已经通读本手册和上面提到的两本书,
+% 有很大概率还会碰到很多问题.
+% 这时我希望用户可以按照正确方式提问,
+% 例如提供\textbf{最小工作示例},
+% 并在\href{https://ask.latexstudio.net/}{论坛}%
+% 上面留下你的问题和相应解答以方便后来者.
+It must be stated that even if you have read this manual
+and the two books mentioned above,
+there is a high probability that you will still encounter many questions.
+At this time, I hope that users can ask questions in the right way,
+such as providing a \textbf{Minimal Working Example},
+and leaving your questions and corresponding answers on the
+\href{https://tex.stackexchange.com/}{forum}
+for the convenience of later generations.
+
+% 本手册大部分内容是个人过去一段时间的使用总结, 其中难免有不甚合理或晦涩难懂的部分.
+% 若用户在阅读本手册的过程中有任何意见和建议,
+% 请发\href{mailto:ranwang.osbert@outlook.com}{邮件}或在
+% \href{https://github.com/OsbertWang/install-latex-guide-zh-cn}{GitHub} 中提
+% \href{https://github.com/OsbertWang/install-latex-guide-zh-cn/issues}{issue}.
+% 本手册另在\href{https://gitee.com/OsbertWang/install-latex-guide-zh-cn}{码云}%
+% 有备份,
+% 并于 2020 年 7 月提交至 CTAN.
+Most of this manual is a summary of the use of the Chinese author
+\href{https://github.com/OsbertWang}{\underline{Ran Wang}}
+over the past period of time.
+It is inevitable that there are some unreasonable or obscure parts.
+If users have any comments and suggestions while reading this manual,
+please send \href{mailto:myhsia@outlook.com}{email} or raise
+\href{https://github.com/myhsia/install-latex-guide-en}{GitHub}
+\href{https://github.com/OsbertWang/install-latex-guide-en/issues}{issue}.
+The Chinese version of this manual was submitted to CTAN in July 2020, and the English translation version was submitted to CTAN in July 2025.
+\emph{Unlike the Chinese version,
+this manual removes some Chinese localization operations.}
+
+% 本手册发布后,
+% \href{https://github.com/EthanDeng}{Dongsheng Deng},
+% \href{https://github.com/muzimuzhi}{muzimuzhi},
+% \href{https://github.com/stone-zeng}{Xiangdong Zeng},
+% \href{https://github.com/taumasyang}{tauyoung},
+% \href{https://github.com/myhsia}{myhsia},
+% 对本手册提出了很好的建议, 并提供了帮助,
+% 其中, 有关 macOS 的内容最初由 Xiangdong Zeng 草拟完成,
+% 而后 Dongsheng Deng, tauyoung 进行了补充,
+% 最近一次更新则由 myhsia 提供.
+% 在此一并感谢.
+\href{https://github.com/EthanDeng}{Dongsheng Deng},
+\href{https://github.com/muzimuzhi}{muzimuzhi},
+\href{https://github.com/stone-zeng}{Xiangdong Zeng},
+\href{https://github.com/taumasyang}{tauyoung},
+\href{https://github.com/myhsia}{myhsia}
+have provided good suggestions and help on the
+\href{https://github.com/OsbertWang/install-latex-zh-cn}{Chinese version}
+of this manual.
+The content about macOS was originally drafted by Xiangdong Zeng,
+supplemented by Dongsheng Deng, tauyoung,
+and the latest update was provided by myhsia.
+Thanks to them.
+
+% 本手册自 2024 年 4 月开通捐赠渠道.
+% 如果你认为本手册曾经帮助过你,
+% 并且你还愿意继续支持本手册,
+% 本着自愿原则,
+% 你可以扫描以下二维码为本手册捐赠固定金额.
+% 需要说明的是,
+% 捐赠行为不会影响本手册的更新.
+% 衷心感谢你的支持.
+\medskip \noindent
+\begin{minipage}{.64\linewidth}
+  \hspace{15pt}
+  To support the development of this manual, welcome scan the QR codes
+  on the right to donate a fixed amount for this manual.
+  A certain percentage of the donation will be transferred to the author of the
+  \href{https://github.com/OsbertWang/install-latex-zh-cn}{Chinese version}
+  of this manual.
+  Thank you for your support.
+\end{minipage}
+\hspace*\fill
+\begin{minipage}{.32\linewidth}
+  \definecolor{paypal}{HTML}{253B80}
+  \definecolor{stripe}{HTML}{635bff}
+  \begin{center}
+    \fancyqr[ classic, height = 5.55em, version = 8, image = {\tikz{
+              \node [ inner sep = 0pt, outer sep = 0pt,
+                      rounded corners = .225em, draw, paypal,
+                      line width = .15em, font = \scriptsize,
+                      minimum width = .9em, minimum height = .9em
+                    ] (paypal) {\textcolor{paypal}\faCcPaypal};
+              \draw [ paypal, very thick ]
+                    ([yshift = -.1125em]paypal.north west) --++ (.9em,0)
+                    ([yshift = +.1125em]paypal.south west) --++ (.9em,0);}}
+            ]{https://www.paypal.com/qrcodes/managed/ 86ffb3de-341c-458f-b410-b4026f90e519?utm_source=consapp_download&  amount=50&currency_code=HKD}%
+    \qquad
+    \fancyqr[ classic, height = 5.55em, version = 8, image = {\tikz{
+              \node [ inner sep = 0pt, rounded corners = .225em,
+                      draw, stripe, line width = .15em, font = \scriptsize,
+                      minimum width = .9em, minimum height = .9em
+                    ] (stripe) {\textcolor{stripe}\faCcStripe};
+              \draw [ stripe, very thick ]
+                    ([yshift = -.1125em]paypal.north west) --++ (.9em,0)
+                    ([yshift = +.1125em]paypal.south west) --++ (.9em,0);}}
+            ]{https://donate.stripe.com/6oU14n48obDB8rG2DBbV600}
+  \end{center}
+\end{minipage}

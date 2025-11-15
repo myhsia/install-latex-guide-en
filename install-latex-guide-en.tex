@@ -1,0 +1,160 @@
+\documentclass[svgnames, 11pt]{report}
+
+\usepackage{ctexheading}
+\linespread{1.2}
+\ctexset{
+  chapter        = {
+    name         = {},
+    format       = \huge\bfseries\raggedright,
+    titleformat  = {},
+    aftername    = \quad,
+    tocline      = \CTEXifname{\protect\numberline{\thechapter}}{}#2,
+  },
+  section/format = \Large\bfseries\raggedright, section/afterindent,
+  appendix/name  = {},
+}
+
+\usepackage[T1]{fontenc}
+\immediate\write18{%
+  otftotfm --encoding=fontools_t1 --no-updmap --coding-scheme='EXTENDED TEX FONT ENCODING - LATIN' --feature=kern --feature=lnum --feature=pnum --feature=ss05 --feature=liga $(kpsewhich LinLibertine_DR.otf) LinLibertineDisplayTMod-lf-t1
+}
+\pdfmapline{+LinLibertineDisplayTMod-lf-t1--base
+  LinLibertineDisplayO "AutoEnc_vdkozffmwlwifh4sgrql3vclve ReEncodeFont"
+  <[a_vdkozf.enc <LinLibertineDisplayO.pfb}
+\DeclareFontFamily{T1}{LinLibertineDisplayTMod-lf}{}
+\DeclareFontShape {T1}{LinLibertineDisplayTMod-lf}{m}{n}
+  {<-> LinLibertineDisplayTMod-lf-t1}{}
+\let \CheckCommand \providecommand
+\usepackage{indentfirst, microtype}
+\usepackage[osf, mono = false]{libertine}
+\usepackage[scale = .875]{sourcecodepro}
+\microtypesetup{nopatch = footnote}
+\usepackage[margin = .95in]{geometry}
+\usepackage{booktabs, array}
+\usepackage{fontawesome7, fancyqr, hologo}
+\usepackage[colorlinks, pdfpagelayout = SinglePage, bookmarksnumbered]{hyperref}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, calc}
+\tikzset{
+  score stars/.style = {
+    star, star points = 5, star point ratio = 2.25, scale = .8,
+    draw = gray, fill = #1,
+    inner sep = 0.14em, anchor = outer point 3
+  }
+}
+\newcommand\stars[1]{%
+  \begin{tikzpicture}
+    \foreach \i in {1, ..., 5} {
+      \pgfmathsetmacro\starcolor{\i<=#1 ? "gray" : "white"}
+      \node [score stars = \starcolor] (star\i) at (\i*0.8em, 0) {};
+    }
+    \pgfmathsetmacro\partstar{#1>int(#1) ? int(#1+1) : 0}
+    \ifnum\partstar>0
+      \pgfmathsetmacro\starpart{#1-(int(#1))}
+      \coordinate (upper left)
+        at (star\partstar.outer point 2 |- star\partstar.outer point 1);
+      \coordinate (upper right)
+        at (star\partstar.outer point 5 |- star\partstar.outer point 1);
+      \coordinate (lower right)
+        at (star\partstar.outer point 5 |- star\partstar.outer point 4);
+      \clip (upper left) rectangle
+            ({$ (upper left)!\starpart!(upper right) $} |- lower right);
+      \node [score stars = gray] at (\partstar*0.8em, 0) {};
+    \fi
+  \end{tikzpicture}%
+}
+
+\usepackage[os = mac]{menukeys}
+\renewmenumacro{\menu}[>]{angularmenus}
+\renewmenumacro{\keys}[+]{shadowedroundedkeys}
+\renewcommand\RSsmallest{5pt}
+\protect\renewcommand\faWindows{%
+  \tikz[rounded corners = .1pt, baseline = -.25em]
+    \foreach \i in {0, 90, 180, 270}
+      \fill [ rotate = \i ] (-.4em, .4em) rectangle (-.025em, .025em);
+}
+
+\usepackage{listings, fancyvrb}
+\lstset{
+  breaklines      = true,
+  columns         = fullflexible,
+  showstringspaces= false,
+  tabsize         = 4,
+  gobble          = 1,
+  numbers         = left,
+  numberstyle     = \tiny\ttfamily,
+  numbersep       = \ccwd,
+  frame           = lines,
+  rulecolor       = \color{blue!40},
+  backgroundcolor = \color{lightgray!20},
+  language        = bash,
+  alsoletter      = -,
+  basicstyle      = \fontsize{9.5}{9.5}\selectfont\ttfamily,
+  commentstyle    = \color{olive!80!black},
+  stringstyle     = \color{brown},
+  emph            = { bash, cd, cp, dpkg, find, grep, ln, md5sum, mkdir,
+                      mount, rm, rmdir, set, sha512sum, sudo, umount },
+  emphstyle       = \color{blue}\bfseries,
+  morekeywords    = { add-apt-repository, apt, brew, certutil, evince,
+                      fc-cache, fc-list, fmtutil, fmtutil-user, fmtutil-sys,
+                      gedit, kpsewhich, l3build, latexmk, mkfontdir,
+                      mkfontscale, notepad, tex, texdoc, tlmgr, pdflatex,
+                      visudo, wget, wsl, xelatex },
+  keywordstyle    = \color{teal}\bfseries
+}
+\lstdefinelanguage{json}{
+  basicstyle   = \small\ttfamily\color{DarkBlue},
+  numberstyle  = \tiny\ttfamily\color{black},
+  alsoletter   = ",
+  morecomment  = [l]{//},
+  morekeywords = {"latexmk", "latexmkpdf", "latexmkxe", "never", "tab"},
+  keywordstyle = \color{FireBrick}\bfseries,
+  literate     ={*[{\textcolor{DarkGreen}{[ }}1  ]{\textcolor{DarkGreen}{ ]}}1
+                 \{{\textcolor{DarkRed}  {\{}}1 \}{\textcolor{DarkRed}  {\}}}1
+                  :{\textcolor{black}    {:}} 1  ,{\textcolor{black}    {,}} 1}
+}
+\lstdefinelanguage{mwe}{
+  language     = {[LaTeX]TeX},
+  texcsstyle   = *\color{violet},
+  morekeywords = {article, ctexart, document},
+  literate     =*\{{\textcolor{magenta}\{}1 \}{\textcolor{magenta}\}}1
+}
+\lstMakeShortInline [ breaklines = true, basicstyle = \ttfamily,
+                      emphstyle = {}, keywordstyle = {} ] {"}
+\VerbatimFootnotes
+
+\title{\bfseries A Short Introduction to \LaTeX\ Installation%
+  \thanks{\url{https://github.com/myhsia/install-latex-guide-en}}%
+}
+\author{Chinese Author: Ran Wang%
+  \thanks{\href{mailto:ranwang.osbert@outlook.com}%
+    {\texttt{ranwang.osbert@outlook.com}}},
+  English Translated by Mingyu Xia\thanks{\ttfamily
+    \href{mailto:xiamingyu@westlake.edu.cn}%
+      {xiamingyu@westlake.edu.cn}%
+  }%
+}
+\date{Released 2025-07-14}
+
+\begin{document}
+
+\maketitle
+
+\include{./chapter/preface}
+
+\tableofcontents
+
+% \include{./chapter/windows}
+% \include{./chapter/ubuntu}
+% \include{./chapter/macos}
+% \include{./chapter/wsl}
+% \include{./chapter/editor}
+% \include{./chapter/overleaf}
+
+% \appendix
+
+% \include{./chapter/addition}
+% \include{./chapter/offline}
+
+\end{document}
