@@ -22,6 +22,7 @@ epstopdf
 epstopdf-pkg
 everysel
 fancyvrb
+fancyqr
 fontawesome7
 framed
 hologo
@@ -40,6 +41,7 @@ oberdiek
 pdflscape
 pdfpages
 pgf
+pict2e
 psnfss
 ragged2e
 siunitx
